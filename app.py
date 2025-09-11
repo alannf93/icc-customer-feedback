@@ -15,84 +15,212 @@ st.set_page_config(
 )
 
 class OllamaFeedbackAnalyzer:
-    def __init__(self, model_name="mistral", base_url="http://localhost:11434"):
+    def __init__(self, model_name="llama3.2", base_url="http://localhost:11434"):
         self.model_name = model_name
         self.base_url = base_url
-        self.api_url = f"{base_url}/api/generate"
+        self.api_url_chat = f"{base_url}/api/chat"
+        self.api_url_generate = f"{base_url}/api/generate"
+        self.api_url_tags = f"{base_url}/api/tags"
         
-        # Test connection
-        self.test_connection()
+        # Test connection and setup
+        self.available_models = self.test_connection()
+        self.use_chat_endpoint = True  # Prefer chat endpoint
     
     def test_connection(self):
-        """Test if Ollama is running and accessible"""
+        """Test if Ollama is running and get available models"""
         try:
-            response = requests.get(f"{self.base_url}/api/tags", timeout=5)
+            # Test basic connectivity
+            response = requests.get(f"{self.base_url}/api/tags", timeout=10)
+            
             if response.status_code == 200:
-                models = response.json().get('models', [])
-                available_models = [m['name'] for m in models]
-                st.sidebar.success(f"✅ Ollama connected! Available models: {', '.join(available_models)}")
+                models_data = response.json()
+                available_models = [m['name'].split(':')[0] for m in models_data.get('models', [])]
                 
-                if self.model_name not in [m.split(':')[0] for m in available_models]:
-                    st.sidebar.warning(f"⚠️ Model '{self.model_name}' not found. Available: {available_models}")
+                st.sidebar.success(f"✅ Ollama connected successfully!")
+                st.sidebar.info(f"📦 Available models: {', '.join(available_models)}")
+                
+                # Check if selected model is available
+                model_base_name = self.model_name.split(':')[0]
+                if model_base_name not in available_models and self.model_name not in [m['name'] for m in models_data.get('models', [])]:
+                    st.sidebar.warning(f"⚠️ Model '{self.model_name}' not found!")
+                    st.sidebar.info(f"💡 Try: `ollama pull {self.model_name}`")
+                    if available_models:
+                        suggested_model = available_models[0]
+                        st.sidebar.info(f"🔄 Will try to use: {suggested_model}")
+                        self.model_name = suggested_model
+                
+                return available_models
+                
             else:
-                st.sidebar.error("❌ Ollama is running but API not responding correctly")
-        except requests.exceptions.RequestException:
-            st.sidebar.error("❌ Cannot connect to Ollama. Make sure it's running on http://localhost:11434")
-            st.sidebar.info("💡 Start Ollama with: `ollama serve` and install a model like `ollama pull mistral`")
+                st.sidebar.error(f"❌ Ollama API responded with status {response.status_code}")
+                return []
+                
+        except requests.exceptions.ConnectionError:
+            st.sidebar.error("❌ Cannot connect to Ollama!")
+            st.sidebar.error("🔧 **Fix Steps:**")
+            st.sidebar.error("1. Start Ollama: `ollama serve`")
+            st.sidebar.error("2. Pull a model: `ollama pull llama3.2`")
+            st.sidebar.error("3. Check: http://localhost:11434")
+            return []
+        except Exception as e:
+            st.sidebar.error(f"❌ Unexpected error: {e}")
+            return []
     
-    def query_ollama(self, prompt: str, max_retries: int = 3) -> str:
-        """Send a query to Ollama with retry logic"""
+    def test_model_simple(self):
+        """Test if the model works with a simple prompt"""
+        test_prompt = "Say 'Hello' in one word."
         
-        payload = {
-            "model": self.model_name,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.1,  # Low temperature for consistent categorization
-                "top_p": 0.9,
-                "num_predict": 50    # Limit response length
+        try:
+            st.info(f"🧪 Testing model '{self.model_name}' with simple prompt...")
+            
+            # Try chat endpoint first
+            chat_payload = {
+                "model": self.model_name,
+                "messages": [{"role": "user", "content": test_prompt}],
+                "stream": False,
+                "options": {
+                    "temperature": 0.1,
+                    "num_predict": 10  # Very short response
+                }
             }
-        }
-        
-        for attempt in range(max_retries):
-            try:
+            
+            response = requests.post(
+                self.api_url_chat,
+                json=chat_payload,
+                timeout=30,
+                headers={'Content-Type': 'application/json'}
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                test_response = result.get('message', {}).get('content', '').strip()
+                st.success(f"✅ Model test successful! Response: '{test_response}'")
+                return True
+            else:
+                st.error(f"❌ Chat endpoint failed (status {response.status_code})")
+                st.error(f"Response: {response.text}")
+                
+                # Try generate endpoint as fallback
+                st.info("🔄 Trying generate endpoint...")
+                generate_payload = {
+                    "model": self.model_name,
+                    "prompt": test_prompt,
+                    "stream": False,
+                    "options": {
+                        "temperature": 0.1,
+                        "num_predict": 10
+                    }
+                }
+                
                 response = requests.post(
-                    self.api_url, 
-                    json=payload, 
+                    self.api_url_generate,
+                    json=generate_payload,
                     timeout=30,
                     headers={'Content-Type': 'application/json'}
                 )
                 
                 if response.status_code == 200:
                     result = response.json()
-                    return result.get('response', '').strip()
+                    test_response = result.get('response', '').strip()
+                    st.success(f"✅ Generate endpoint works! Response: '{test_response}'")
+                    self.use_chat_endpoint = False
+                    return True
                 else:
-                    st.error(f"Ollama API error: {response.status_code}")
+                    st.error(f"❌ Both endpoints failed!")
+                    st.error(f"Generate response: {response.text}")
+                    return False
+                    
+        except requests.exceptions.Timeout:
+            st.error("❌ Model test timed out! Model might be too large or slow.")
+            return False
+        except Exception as e:
+            st.error(f"❌ Model test failed: {e}")
+            return False
+    
+    def query_ollama(self, prompt: str, max_retries: int = 2) -> str:
+        """Send a query to Ollama with proper error handling"""
+        
+        if self.use_chat_endpoint:
+            # Use chat endpoint (recommended)
+            payload = {
+                "model": self.model_name,
+                "messages": [{"role": "user", "content": prompt}],
+                "stream": False,
+                "options": {
+                    "temperature": 0.1,
+                    "num_predict": 50,
+                    "top_p": 0.9
+                }
+            }
+            endpoint = self.api_url_chat
+        else:
+            # Use generate endpoint (fallback)
+            payload = {
+                "model": self.model_name,
+                "prompt": prompt,
+                "stream": False,
+                "options": {
+                    "temperature": 0.1,
+                    "num_predict": 50,
+                    "top_p": 0.9
+                }
+            }
+            endpoint = self.api_url_generate
+        
+        for attempt in range(max_retries):
+            try:
+                response = requests.post(
+                    endpoint,
+                    json=payload,
+                    timeout=60,  # Increased timeout
+                    headers={'Content-Type': 'application/json'}
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    
+                    if self.use_chat_endpoint:
+                        return result.get('message', {}).get('content', '').strip()
+                    else:
+                        return result.get('response', '').strip()
+                else:
+                    error_msg = f"API error {response.status_code}: {response.text[:200]}"
+                    if attempt == max_retries - 1:
+                        st.error(f"❌ {error_msg}")
                     return "error"
                     
-            except requests.exceptions.RequestException as e:
+            except requests.exceptions.Timeout:
+                error_msg = f"Request timeout on attempt {attempt + 1}"
                 if attempt == max_retries - 1:
-                    st.error(f"Failed to connect to Ollama after {max_retries} attempts: {e}")
-                    return "error"
-                time.sleep(1)  # Wait before retry
+                    st.error(f"❌ {error_msg}")
+                return "error"
+            except requests.exceptions.RequestException as e:
+                error_msg = f"Connection error: {e}"
+                if attempt == max_retries - 1:
+                    st.error(f"❌ {error_msg}")
+                return "error"
+            
+            # Wait before retry
+            if attempt < max_retries - 1:
+                time.sleep(2)
         
         return "error"
     
     def create_categorization_prompt(self, feedback: str) -> str:
         """Create a structured prompt for categorizing feedback"""
         
-        prompt = f"""You are analyzing customer feedback for a medical interpreter service. Your job is to categorize the feedback into one of these exact categories:
+        prompt = f"""Analyze this customer feedback for a medical interpreter service. Categorize it into ONE of these categories:
 
-ISSUE CATEGORIES (problems/complaints):
+ISSUE CATEGORIES:
 - connection_issues: Problems connecting to the service
 - disconnection_issues: Calls being disconnected or ended prematurely  
 - audio_video_issues: Audio quality, noise, volume, video problems
 - professionalism_issues: Unprofessional behavior, inappropriate conduct
-- accuracy_issues: Translation/interpretation accuracy or speed problems
+- accuracy_issues: Translation/interpretation accuracy or speed problems (NOT positive mentions)
 - availability_issues: Interpreter not available, not present, not responding
 - timing_issues: Rushing, being in a hurry, time-related problems
 
-POSITIVE CATEGORIES (compliments/praise):
+POSITIVE CATEGORIES:
 - excellent_service: Excellent, exceptional, fantastic, amazing work
 - professional_behavior: Professional, courteous, skilled, clear communication
 - helpful_patient: Helpful, patient, kind, sweet, friendly behavior
@@ -101,11 +229,14 @@ OTHER:
 - brief_positive: Short positive responses like "good", "great", "thank you"
 - other: Unclear feedback or doesn't fit above categories
 
-CRITICAL: Pay attention to context and sentiment. Words like "translate" or "interpreter" can be positive when used in praise (e.g., "best translator", "translated correctly") or negative when describing problems.
+CRITICAL: Pay attention to context and sentiment!
+- "Best translator" = POSITIVE (professional_behavior)
+- "Translated correctly" = POSITIVE (professional_behavior)  
+- "Interpreter didn't translate" = NEGATIVE (accuracy_issues)
 
-Feedback to categorize: "{feedback}"
+Feedback: "{feedback}"
 
-Respond with ONLY the category name (e.g., "professional_behavior" or "connection_issues"). No explanations."""
+Respond with ONLY the category name (e.g., "professional_behavior")."""
 
         return prompt
     
@@ -125,23 +256,29 @@ Respond with ONLY the category name (e.g., "professional_behavior" or "connectio
             'helpful_patient', 'brief_positive', 'other'
         }
         
-        if result.lower() in valid_categories:
-            return result.lower()
-        elif result == "error":
+        if result == "error":
             return "error"
+        elif result.lower() in valid_categories:
+            return result.lower()
         else:
-            # If LLM returned something unexpected, try to map it
+            # If LLM returned something unexpected, try to map it intelligently
             result_lower = result.lower()
-            if any(word in result_lower for word in ['connection', 'connect']):
+            
+            # Look for keywords in the response
+            if any(word in result_lower for word in ['professional', 'behavior']):
+                return 'professional_behavior'
+            elif any(word in result_lower for word in ['excellent', 'amazing', 'fantastic']):
+                return 'excellent_service'
+            elif any(word in result_lower for word in ['helpful', 'patient', 'kind']):
+                return 'helpful_patient'
+            elif any(word in result_lower for word in ['connection', 'connect']):
                 return 'connection_issues'
-            elif any(word in result_lower for word in ['disconnect', 'hung up', 'cut off']):
+            elif any(word in result_lower for word in ['disconnect', 'hung up']):
                 return 'disconnection_issues'
             elif any(word in result_lower for word in ['audio', 'sound', 'noise']):
                 return 'audio_video_issues'
-            elif any(word in result_lower for word in ['professional']):
-                return 'professional_behavior'
-            elif any(word in result_lower for word in ['excellent', 'amazing']):
-                return 'excellent_service'
+            elif any(word in result_lower for word in ['accuracy', 'translate', 'interpret']) and any(word in result_lower for word in ['problem', 'issue', 'bad']):
+                return 'accuracy_issues'
             else:
                 return 'other'
     
@@ -158,7 +295,7 @@ Respond with ONLY the category name (e.g., "professional_behavior" or "connectio
             results.append(category)
             
             # Small delay to avoid overwhelming Ollama
-            time.sleep(0.1)
+            time.sleep(0.5)
         
         return results
 
@@ -185,7 +322,7 @@ def analyze_feedback_with_ollama(df, analyzer):
     def update_progress(current, total):
         progress = current / total
         progress_bar.progress(progress)
-        progress_text.text(f"Analyzing feedback {current}/{total}...")
+        progress_text.text(f"AI analyzing feedback {current}/{total}... ({progress:.0%})")
     
     # Analyze feedback using Ollama
     feedback_list = df['feedback_clean'].tolist()
@@ -197,6 +334,11 @@ def analyze_feedback_with_ollama(df, analyzer):
     
     # Add results to dataframe
     df['category'] = categories
+    
+    # Count errors
+    error_count = sum(1 for cat in categories if cat == 'error')
+    if error_count > 0:
+        st.warning(f"⚠️ {error_count} items could not be analyzed due to API errors")
     
     # Group categories into broader themes
     issue_categories = ['connection_issues', 'disconnection_issues', 'audio_video_issues', 
@@ -212,8 +354,11 @@ def analyze_feedback_with_ollama(df, analyzer):
 def create_visualizations(df):
     """Create charts and visualizations"""
     
+    # Filter out errors for visualization
+    df_clean = df[df['category'] != 'error']
+    
     # Overall sentiment breakdown
-    theme_counts = df['theme'].value_counts()
+    theme_counts = df_clean['theme'].value_counts()
     fig_pie = px.pie(
         values=theme_counts.values, 
         names=theme_counts.index,
@@ -222,7 +367,7 @@ def create_visualizations(df):
     )
     
     # Issue breakdown by category
-    issue_df = df[df['theme'] == 'Issues']
+    issue_df = df_clean[df_clean['theme'] == 'Issues']
     if not issue_df.empty:
         issue_counts = issue_df['category'].value_counts()
         
@@ -257,11 +402,15 @@ def create_visualizations(df):
 def display_detailed_results(df):
     """Display detailed breakdown tables with AI insights"""
     
+    # Filter out errors for analysis
+    df_clean = df[df['category'] != 'error']
+    
     # Summary statistics
     total_feedback = len(df)
-    issues_count = len(df[df['theme'] == 'Issues'])
-    positive_count = len(df[df['theme'] == 'Positive'])
-    other_count = len(df[df['theme'] == 'Other'])
+    total_analyzed = len(df_clean)
+    issues_count = len(df_clean[df_clean['theme'] == 'Issues'])
+    positive_count = len(df_clean[df_clean['theme'] == 'Positive'])
+    other_count = len(df_clean[df_clean['theme'] == 'Other'])
     error_count = len(df[df['category'] == 'error'])
     
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -269,11 +418,11 @@ def display_detailed_results(df):
     with col1:
         st.metric("Total Feedback", total_feedback)
     with col2:
-        st.metric("Issues Identified", f"{issues_count} ({issues_count/total_feedback*100:.0f}%)")
+        st.metric("Successfully Analyzed", total_analyzed)
     with col3:
-        st.metric("Positive Feedback", f"{positive_count} ({positive_count/total_feedback*100:.0f}%)")
+        st.metric("Issues Identified", f"{issues_count} ({issues_count/total_analyzed*100:.0f}%)" if total_analyzed > 0 else "0")
     with col4:
-        st.metric("Other/Unclear", f"{other_count} ({other_count/total_feedback*100:.0f}%)")
+        st.metric("Positive Feedback", f"{positive_count} ({positive_count/total_analyzed*100:.0f}%)" if total_analyzed > 0 else "0")
     with col5:
         if error_count > 0:
             st.metric("Analysis Errors", error_count, delta="⚠️")
@@ -281,27 +430,32 @@ def display_detailed_results(df):
     # Show AI categorization examples
     st.subheader("🤖 AI Categorization Examples")
     
-    # Show some examples of how AI categorized ambiguous cases
+    # Show some examples of how AI categorized key cases
     examples_to_show = [
-        ("Translating medical terminology correctly", "Should be positive"),
-        ("Best translator ive had. Translated everything clearly and efficiently.", "Should be positive"),
-        ("interpreter did not interpret", "Should be accuracy issue"),
-        ("Very patient and skilled", "Should be positive")
+        "Translating medical terminology correctly",
+        "Best translator ive had. Translated everything clearly and efficiently.",
+        "Very patient and skilled",
+        "interpreter did not interpret",
+        "call cut off",
+        "very rude"
     ]
     
-    for example_text, expected in examples_to_show:
+    for example_text in examples_to_show:
         matching_rows = df[df['feedback_clean'].str.contains(example_text, case=False, na=False)]
         if not matching_rows.empty:
             actual_category = matching_rows.iloc[0]['category']
             actual_theme = matching_rows.iloc[0]['theme']
             
-            # Determine if categorization looks correct
-            is_correct = (
-                (expected.startswith("Should be positive") and actual_theme == "Positive") or
-                (expected.startswith("Should be accuracy") and actual_category == "accuracy_issues")
-            )
+            # Color code based on whether it looks correct
+            if actual_theme == "Positive" and any(word in example_text.lower() for word in ['best', 'correctly', 'patient', 'skilled']):
+                status_icon = "✅"
+            elif actual_theme == "Issues" and any(word in example_text.lower() for word in ['did not', 'cut off', 'rude']):
+                status_icon = "✅"
+            elif actual_category == "error":
+                status_icon = "❌"
+            else:
+                status_icon = "🤔"
             
-            status_icon = "✅" if is_correct else "❌"
             st.write(f"{status_icon} **\"{example_text}\"** → `{actual_category}` ({actual_theme})")
     
     # Detailed issue breakdown
@@ -318,7 +472,7 @@ def display_detailed_results(df):
     }
     
     for category, label in issue_categories.items():
-        category_data = df[df['category'] == category]
+        category_data = df_clean[df_clean['category'] == category]
         if not category_data.empty:
             with st.expander(f"{label} ({len(category_data)} cases)"):
                 for _, row in category_data.iterrows():
@@ -335,79 +489,12 @@ def display_detailed_results(df):
     }
     
     for category, label in positive_categories.items():
-        category_data = df[df['category'] == category]
+        category_data = df_clean[df_clean['category'] == category]
         if not category_data.empty:
             with st.expander(f"{label} ({len(category_data)} cases)"):
                 # Show first 5 examples to keep it manageable
                 for _, row in category_data.head(5).iterrows():
                     st.write(f"• \"{row['feedback_clean']}\"")
-
-def generate_actionable_insights(df):
-    """Generate actionable recommendations based on AI analysis"""
-    
-    st.subheader("🎯 AI-Generated Insights & Recommendations")
-    
-    total_feedback = len(df)
-    issues_df = df[df['theme'] == 'Issues']
-    
-    # Calculate technical issues percentage
-    technical_issues = ['connection_issues', 'disconnection_issues', 'audio_video_issues']
-    technical_count = len(issues_df[issues_df['category'].isin(technical_issues)])
-    
-    st.markdown("### Priority 1: Technical Infrastructure (AI-Identified)")
-    if technical_count > 0:
-        st.error(f"**{technical_count} cases ({technical_count/total_feedback*100:.0f}% of all feedback) are technical issues**")
-    else:
-        st.success("**No significant technical issues detected by AI analysis**")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        **AI-Recommended Actions:**
-        - Audit connection infrastructure
-        - Implement real-time connection monitoring
-        - Create audio quality standards
-        - Establish environment guidelines for interpreters
-        """)
-    
-    with col2:
-        # Show top technical issues
-        if technical_count > 0:
-            tech_breakdown = issues_df[issues_df['category'].isin(technical_issues)]['category'].value_counts()
-            st.markdown("**Technical Issues Breakdown:**")
-            for issue, count in tech_breakdown.items():
-                issue_name = issue.replace('_', ' ').title()
-                st.write(f"• {issue_name}: {count} cases")
-    
-    # Service quality recommendations
-    service_issues = ['professionalism_issues', 'accuracy_issues', 'availability_issues', 'timing_issues']
-    service_count = len(issues_df[issues_df['category'].isin(service_issues)])
-    
-    if service_count > 0:
-        st.markdown("### Priority 2: Service Quality Control (AI-Identified)")
-        st.warning(f"**{service_count} cases related to interpreter performance**")
-        st.markdown("""
-        **AI-Recommended Actions:**
-        - Implement interpreter training program
-        - Create session completion protocols
-        - Establish professionalism guidelines
-        - Regular performance monitoring
-        """)
-    
-    # Positive feedback insights
-    positive_count = len(df[df['theme'] == 'Positive'])
-    st.markdown("### 🟢 Success Factors to Leverage (AI-Identified)")
-    st.success(f"**{positive_count} positive feedback cases ({positive_count/total_feedback*100:.0f}%) highlight key success factors**")
-    
-    # Extract most common positive themes
-    positive_df = df[df['theme'] == 'Positive']
-    if not positive_df.empty:
-        positive_breakdown = positive_df['category'].value_counts()
-        st.markdown("**Top Success Factors:**")
-        for category, count in positive_breakdown.head(3).items():
-            category_name = category.replace('_', ' ').title()
-            st.write(f"• {category_name}: {count} mentions")
 
 # Main Streamlit App
 def main():
@@ -416,24 +503,25 @@ def main():
     
     st.markdown("""
     This enhanced tool uses **Large Language Model (LLM) AI** via Ollama to understand context, sentiment, 
-    and nuanced meaning in feedback - solving the limitations of keyword-based approaches.
+    and nuanced meaning in feedback - solving the keyword-based approach limitations.
     
     **Key Improvements:**
     - 🧠 **Context-aware**: Understands "best translator" vs "interpreter problems"
     - 🎯 **Sentiment analysis**: Distinguishes praise from complaints
     - 🔧 **Handles ambiguity**: Processes complex, multi-topic feedback
-    - 📊 **More accurate categorization**: Reduces false positives/negatives
+    - 📊 **More accurate**: Reduces false positives/negatives
     """)
     
     # Ollama settings
     st.sidebar.header("🤖 AI Model Settings")
     
-    model_options = ["mistral", "llama2", "codellama", "phi", "neural-chat"]
+    # Model selection
+    model_options = ["llama3.2", "llama3.2:1b", "mistral", "phi3", "gemma2", "qwen2.5"]
     selected_model = st.sidebar.selectbox(
         "Select Ollama Model", 
         options=model_options,
         index=0,
-        help="Make sure the selected model is installed: `ollama pull <model-name>`"
+        help="Smaller models (1b, 3b) are faster but less accurate. Larger models (7b+) are more accurate but slower."
     )
     
     ollama_url = st.sidebar.text_input(
@@ -445,6 +533,11 @@ def main():
     # Initialize analyzer
     try:
         analyzer = OllamaFeedbackAnalyzer(model_name=selected_model, base_url=ollama_url)
+        
+        # Test model if user requests
+        if st.sidebar.button("🧪 Test Model"):
+            analyzer.test_model_simple()
+            
     except Exception as e:
         st.error(f"Failed to initialize Ollama analyzer: {e}")
         return
@@ -470,8 +563,18 @@ def main():
             for i, feedback in enumerate(sample_feedback, 1):
                 st.write(f"{i}. \"{feedback}\"")
             
+            # Check if model is working
+            if len(analyzer.available_models) == 0:
+                st.error("❌ Cannot proceed - Ollama is not accessible")
+                st.stop()
+            
             # Analyze button
             if st.button("🚀 Start AI Analysis", type="primary"):
+                
+                # Test model first
+                if not analyzer.test_model_simple():
+                    st.error("❌ Model test failed - cannot proceed with analysis")
+                    st.stop()
                 
                 with st.spinner("🤖 AI is analyzing feedback using Ollama LLM..."):
                     df_analyzed = analyze_feedback_with_ollama(df, analyzer)
@@ -498,9 +601,6 @@ def main():
                 # Summary metrics and detailed breakdown
                 display_detailed_results(df_analyzed)
                 
-                # Actionable insights
-                generate_actionable_insights(df_analyzed)
-                
                 # Option to download processed data
                 st.subheader("📥 Download AI Analysis Results")
                 csv_download = df_analyzed.to_csv(index=False)
@@ -512,53 +612,72 @@ def main():
                 )
     
     else:
-        # Show methodology while waiting for upload
-        st.subheader("🧠 AI Analysis Methodology")
+        # Show setup instructions while waiting for upload
+        st.subheader("🔧 Setup Instructions")
         
         st.markdown("""
-        **How AI-Powered Analysis Solves Context Problems:**
+        **Quick Setup (5 minutes):**
         
-        **❌ Keyword-Based Problems:**
-        - "Best translator" → Detected as "accuracy issue" (wrong!)
-        - "Translating correctly" → Detected as "problem" (wrong!)
-        - Can't understand context or sentiment
+        1. **Install Ollama:**
+        ```bash
+        # Linux/Mac
+        curl -fsSL https://ollama.ai/install.sh | sh
         
-        **✅ AI-Powered Solutions:**
-        - **Context Understanding**: "Best translator" → Positive feedback ✓
-        - **Sentiment Analysis**: "Translating correctly" → Positive feedback ✓
-        - **Nuanced Processing**: Handles complex, multi-topic feedback
-        - **Reduced False Positives**: More accurate categorization
+        # Windows: Download from https://ollama.ai
+        ```
         
-        **AI Categories Detected:**
+        2. **Start Ollama:**
+        ```bash
+        ollama serve
+        ```
         
-        **🔴 Issue Categories:**
-        - Connection Issues (e.g., "couldn't connect")
-        - Disconnection Problems (e.g., "call cut off", "hung up") 
-        - Audio/Video Quality (e.g., "background noise", "hard to hear")
-        - Professionalism Issues (e.g., "very rude", "inappropriate")
-        - Accuracy/Speed Problems (e.g., "didn't interpret", "too slow")
-        - Availability Issues (e.g., "not there", "left early")
-        - Timing Issues (e.g., "rushed the call")
+        3. **Install a model (in another terminal):**
+        ```bash
+        ollama pull llama3.2:1b    # Fast, small model (1.3GB)
+        # or
+        ollama pull llama3.2       # Better accuracy (2GB)
+        # or  
+        ollama pull mistral        # Good balance (4GB)
+        ```
         
-        **🟢 Positive Categories:**
-        - Excellent Service (e.g., "fantastic", "amazing job")
-        - Professional Behavior (e.g., "very professional", "skilled")
-        - Helpful/Patient (e.g., "very patient", "helpful")
-        - Brief Positive (e.g., "good", "great", "thank you")
+        4. **Verify it's working:**
+        ```bash
+        ollama list               # Should show your models
+        curl http://localhost:11434/api/tags  # Should return JSON
+        ```
         
-        **🤖 AI Advantages:**
-        - Understands context and sentiment
-        - Handles misspellings naturally
-        - Processes complex sentences
-        - Distinguishes praise from complaints
-        - Adapts to various writing styles
+        **Then upload your CSV file above to start analysis!**
         """)
         
+        st.subheader("🧠 Why AI Analysis is Better")
+        
         st.markdown("""
-        **Prerequisites:**
-        1. Install Ollama: `curl -fsSL https://ollama.ai/install.sh | sh`
-        2. Start Ollama: `ollama serve`
-        3. Install a model: `ollama pull mistral`
+        **❌ Keyword-Based Problems (Old Approach):**
+        - "Best translator" → Wrongly detected as "accuracy issue"
+        - "Translating correctly" → Wrongly detected as "problem"
+        - Cannot understand context or sentiment
+        - Many false positives and negatives
+        
+        **✅ AI-Powered Solutions (New Approach):**
+        - **Context Understanding**: "Best translator" → Correctly categorized as positive feedback ✓
+        - **Sentiment Analysis**: "Translating correctly" → Correctly categorized as praise ✓
+        - **Nuanced Processing**: Handles complex, multi-topic feedback
+        - **Reduced Errors**: Dramatically more accurate categorization
+        
+        **Example AI Categories Detected:**
+        
+        **🔴 Issue Categories:**
+        - Connection/Disconnection Problems
+        - Audio/Video Quality Issues  
+        - Professionalism & Behavior Issues
+        - Accuracy/Speed Problems (context-aware)
+        - Availability & Timing Issues
+        
+        **🟢 Positive Categories:**
+        - Excellent Service Recognition
+        - Professional Behavior Praise
+        - Helpful/Patient Feedback
+        - Brief Positive Responses
         """)
 
 if __name__ == "__main__":
