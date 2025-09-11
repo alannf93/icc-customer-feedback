@@ -4,13 +4,205 @@ import plotly.express as px
 import plotly.graph_objects as go
 from collections import Counter
 import re
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from fuzzywuzzy import fuzz, process
+import string
+
+# Download required NLTK data
+try:
+    nltk.download('stopwords', quiet=True)
+    nltk.download('punkt', quiet=True)
+except:
+    pass
 
 # Page configuration
 st.set_page_config(
-    page_title="CSAT Feedback Analyzer",
+    page_title="Enhanced CSAT Feedback Analyzer",
     page_icon="📊",
     layout="wide"
 )
+
+class RobustFeedbackCategorizer:
+    def __init__(self):
+        self.stemmer = PorterStemmer()
+        self.stop_words = set(stopwords.words('english')) if 'english' in stopwords.fileids() else set()
+        
+        # Enhanced keyword dictionaries with variations, misspellings, and synonyms
+        self.keywords = {
+            'connection_issues': {
+                'primary': ['connect', 'connection', 'connecting'],
+                'variations': ['conect', 'conectivity', 'conection'],
+                'phrases': ['not connecting', 'no connection', 'not able to connect', 
+                           'unable to connect', 'connection failed', 'failed to connect']
+            },
+            'disconnection_issues': {
+                'primary': ['disconnect', 'disconnected', 'hang up', 'hung up', 'cut off'],
+                'variations': ['disconect', 'dissconnect', 'hanged up'],
+                'phrases': ['call ended', 'ended call', 'randomly ended', 'call cut off',
+                           'ended randomly', 'keep getting disconnected']
+            },
+            'audio_video_issues': {
+                'primary': ['audio', 'sound', 'hear', 'noise', 'volume', 'loud', 'quiet'],
+                'variations': ['hearring', 'nois', 'volum'],
+                'phrases': ['black screen', 'no audio', 'no sound', 'background noise',
+                           'difficult to hear', 'hard time hearing', 'music playing',
+                           'radio playing', 'dog barking', 'a lot of noise']
+            },
+            'professionalism_issues': {
+                'primary': ['rude', 'unprofessional', 'aggressive', 'inappropriate', 'awful'],
+                'variations': ['profesional', 'proffessional', 'awfull', 'aweful'],
+                'phrases': ['not wearing a shirt', 'wasn\'t wearing a shirt', 'very rude',
+                           'extremely unprofessional', 'just a chair', 'person not there']
+            },
+            'accuracy_issues': {
+                'primary': ['interpret', 'translate', 'listening', 'understand'],
+                'variations': ['intepreter', 'interperter', 'interprter', 'translat'],
+                'phrases': ['not listening', 'did not interpret', 'takes too long to translate',
+                           'not interpreting', 'making noise', 'did not understand']
+            },
+            'availability_issues': {
+                'primary': ['answer', 'available', 'there', 'present'],
+                'variations': ['availble', 'ther'],
+                'phrases': ['never answered', 'no answer', 'person not there',
+                           'left before', 'not there', 'just a chair']
+            },
+            'timing_issues': {
+                'primary': ['anxious', 'rush', 'hurry', 'quick'],
+                'variations': ['anxius', 'anxyous'],
+                'phrases': ['anxious to end', 'rushed the call', 'seemed in a hurry']
+            },
+            'excellent_service': {
+                'primary': ['excellent', 'exceptional', 'fantastic', 'awesome', 'amazing', 'wonderful'],
+                'variations': ['exellent', 'excelent', 'awsome', 'amazin', 'wonderfull'],
+                'phrases': ['excellent service', 'exceptional job', 'fantastic job',
+                           'wonderful job', 'amazing job']
+            },
+            'professional_behavior': {
+                'primary': ['professional', 'courteous', 'skilled', 'clear', 'polite'],
+                'variations': ['profesional', 'proffessional', 'skiled', 'cler'],
+                'phrases': ['well spoken', 'very professional', 'very skilled',
+                           'very clear', 'spoke clearly']
+            },
+            'helpful_patient': {
+                'primary': ['helpful', 'patient', 'kind', 'sweet', 'friendly'],
+                'variations': ['helpfull', 'pacient', 'patiant', 'freindly'],
+                'phrases': ['very helpful', 'very patient', 'very kind',
+                           'very sweet', 'very friendly']
+            }
+        }
+    
+    def preprocess_text(self, text):
+        """Enhanced text preprocessing with stemming and normalization"""
+        if not text or pd.isna(text):
+            return ""
+        
+        # Convert to lowercase and remove extra whitespace
+        text = str(text).lower().strip()
+        
+        # Remove punctuation except apostrophes (for contractions)
+        text = re.sub(r'[^\w\s\']', ' ', text)
+        
+        # Normalize whitespace
+        text = re.sub(r'\s+', ' ', text)
+        
+        return text
+    
+    def stem_keywords(self, keyword_list):
+        """Stem keywords for better matching"""
+        stemmed = []
+        for keyword in keyword_list:
+            words = keyword.split()
+            stemmed_words = [self.stemmer.stem(word) for word in words]
+            stemmed.append(' '.join(stemmed_words))
+        return stemmed
+    
+    def fuzzy_match_keywords(self, text, keywords, threshold=75):
+        """Use fuzzy matching to find similar keywords"""
+        words = text.split()
+        
+        # Check individual words and phrases
+        for keyword in keywords:
+            # Direct substring check
+            if keyword in text:
+                return True
+            
+            # Fuzzy match for individual words
+            for word in words:
+                if fuzz.ratio(keyword, word) >= threshold:
+                    return True
+            
+            # Fuzzy match for phrases (if keyword has multiple words)
+            if ' ' in keyword:
+                keyword_words = keyword.split()
+                for i in range(len(words) - len(keyword_words) + 1):
+                    phrase = ' '.join(words[i:i+len(keyword_words)])
+                    if fuzz.ratio(keyword, phrase) >= threshold:
+                        return True
+        
+        return False
+    
+    def check_category_match(self, text, category_keywords, fuzzy_threshold=75):
+        """Check if text matches any keywords in a category using multiple techniques"""
+        preprocessed_text = self.preprocess_text(text)
+        
+        # Stem the preprocessed text
+        words = preprocessed_text.split()
+        stemmed_words = [self.stemmer.stem(word) for word in words if word not in self.stop_words]
+        stemmed_text = ' '.join(stemmed_words)
+        
+        # Check primary keywords with exact and fuzzy matching
+        all_keywords = (category_keywords.get('primary', []) + 
+                       category_keywords.get('variations', []) + 
+                       category_keywords.get('phrases', []))
+        
+        # 1. Direct substring matching (fastest)
+        for keyword in all_keywords:
+            if keyword in preprocessed_text:
+                return True
+        
+        # 2. Stemmed keyword matching
+        stemmed_keywords = self.stem_keywords(all_keywords)
+        for keyword in stemmed_keywords:
+            if keyword in stemmed_text:
+                return True
+        
+        # 3. Fuzzy matching (for misspellings)
+        if self.fuzzy_match_keywords(preprocessed_text, all_keywords, fuzzy_threshold):
+            return True
+        
+        # 4. Partial ratio for substring variations
+        for keyword in all_keywords:
+            if fuzz.partial_ratio(keyword, preprocessed_text) >= fuzzy_threshold + 10:
+                return True
+        
+        return False
+    
+    def categorize_feedback(self, feedback_text, fuzzy_threshold=75):
+        """Enhanced categorization with hierarchical priority and fuzzy matching"""
+        if not feedback_text or pd.isna(feedback_text):
+            return 'other'
+        
+        # Hierarchical categorization (technical issues first, then service, then positive)
+        priority_order = [
+            'connection_issues', 'disconnection_issues', 'audio_video_issues',
+            'professionalism_issues', 'accuracy_issues', 'availability_issues', 
+            'timing_issues', 'excellent_service', 'professional_behavior', 
+            'helpful_patient'
+        ]
+        
+        for category in priority_order:
+            if self.check_category_match(feedback_text, self.keywords[category], fuzzy_threshold):
+                return category
+        
+        # Brief positive responses (fallback)
+        preprocessed = self.preprocess_text(feedback_text)
+        if (any(word in preprocessed for word in ['good', 'great', 'thank']) and 
+            len(preprocessed) < 50):
+            return 'brief_positive'
+        
+        return 'other'
 
 def load_and_clean_data(uploaded_file):
     """Load and clean the CSV data"""
@@ -25,39 +217,14 @@ def load_and_clean_data(uploaded_file):
         st.error("CSV must contain a 'ClientFeedback' column")
         return None
 
-def categorize_feedback(feedback_text):
-    """Categorize feedback using keyword matching with hierarchical priority"""
-    feedback = feedback_text.lower()
+def analyze_feedback(df, fuzzy_threshold=75):
+    """Perform the main analysis with enhanced categorization"""
+    categorizer = RobustFeedbackCategorizer()
     
-    # Define keyword dictionaries (same as analysis)
-    keywords = {
-        'connection_issues': ['not connecting', 'no connection', 'black screen', 'no audio', 'no sound', 'never answered', 'no answer'],
-        'disconnection_issues': ['cut off', 'hang up', 'hung up', 'disconnected', 'ended call'],
-        'audio_video_issues': ['background noise', 'difficult to hear', 'loud', 'music playing', 'radio playing', 'dog barking', 'noise'],
-        'professionalism_issues': ['rude', 'aggressive', 'unprofessional', "wasn't wearing a shirt", 'inappropriate', 'awful'],
-        'accuracy_issues': ['not listening', 'did not interpret', 'takes too long to translate', 'making so much noise'],
-        'availability_issues': ['left before', 'person not there', 'just a chair'],
-        'timing_issues': ['anxious to end'],
-        'excellent_service': ['excellent', 'exceptional', 'fantastic', 'awesome', 'amazing', 'wonderful'],
-        'professional_behavior': ['professional', 'courteous', 'patient', 'skilled', 'clear', 'well spoken'],
-        'helpful_patient': ['helpful', 'kind', 'sweet', 'friendly']
-    }
-    
-    # Hierarchical categorization (technical issues first, then service, then positive)
-    for category, words in keywords.items():
-        if any(word in feedback for word in words):
-            return category
-    
-    # Brief positive responses
-    if any(word in feedback for word in ['good', 'great', 'thank you']) and len(feedback) < 50:
-        return 'brief_positive'
-    
-    return 'other'
-
-def analyze_feedback(df):
-    """Perform the main analysis"""
     # Categorize all feedback
-    df['category'] = df['feedback_clean'].apply(categorize_feedback)
+    df['category'] = df['feedback_clean'].apply(
+        lambda x: categorizer.categorize_feedback(x, fuzzy_threshold)
+    )
     
     # Group categories into broader themes
     issue_categories = ['connection_issues', 'disconnection_issues', 'audio_video_issues', 
@@ -239,13 +406,22 @@ def generate_actionable_insights(df):
 
 # Main Streamlit App
 def main():
-    st.title("📊 CSAT Feedback Analysis Tool")
-    st.markdown("### Medical Interpreter Service Feedback Analyzer")
+    st.title("📊 Enhanced CSAT Feedback Analysis Tool")
+    st.markdown("### Medical Interpreter Service Feedback Analyzer with Fuzzy Matching")
     
     st.markdown("""
-    This tool analyzes client feedback for medical interpreter services using keyword-based categorization 
-    to identify common issues and positive trends. Upload your CSAT CSV file to get started.
+    This enhanced tool uses advanced text processing techniques including **fuzzy matching**, **stemming**, 
+    and **expanded keyword dictionaries** to identify common issues and positive trends even with misspellings 
+    and variations in wording.
     """)
+    
+    # Fuzzy matching threshold setting
+    st.sidebar.header("⚙️ Advanced Settings")
+    fuzzy_threshold = st.sidebar.slider(
+        "Fuzzy Matching Sensitivity", 
+        min_value=60, max_value=90, value=75,
+        help="Higher values = more strict matching. Lower values = catches more variations but may have false positives."
+    )
     
     # File upload
     uploaded_file = st.file_uploader(
@@ -256,15 +432,18 @@ def main():
     
     if uploaded_file is not None:
         # Load and process data
-        with st.spinner("Processing feedback data..."):
+        with st.spinner("Processing feedback data with enhanced algorithms..."):
             df = load_and_clean_data(uploaded_file)
             
         if df is not None:
             # Perform analysis
-            df_analyzed = analyze_feedback(df)
+            df_analyzed = analyze_feedback(df, fuzzy_threshold)
             
             # Display results
-            st.success(f"✅ Analyzed {len(df_analyzed)} feedback entries")
+            st.success(f"✅ Analyzed {len(df_analyzed)} feedback entries with enhanced fuzzy matching")
+            
+            # Show improvements detected
+            st.info("🔧 **Enhanced Features Active:** Fuzzy matching for misspellings, stemming for word variations, expanded keyword dictionaries")
             
             # Show visualizations
             st.subheader("📈 Analysis Overview")
@@ -292,33 +471,53 @@ def main():
             st.download_button(
                 label="Download Analyzed Data as CSV",
                 data=csv_download,
-                file_name="csat_analysis_results.csv",
+                file_name="enhanced_csat_analysis_results.csv",
                 mime="text/csv"
             )
     
     else:
         # Show methodology while waiting for upload
-        st.subheader("🔧 Analysis Methodology")
+        st.subheader("🔧 Enhanced Analysis Methodology")
         
         st.markdown("""
-        **This tool uses the same approach as the manual analysis:**
+        **This tool now includes advanced robustness features:**
         
-        1. **Data Cleaning**: Removes empty feedback, trims whitespace
-        2. **Keyword-Based Categorization**: Uses domain-specific dictionaries to identify issues
-        3. **Hierarchical Classification**: Technical issues → Service issues → Positive feedback
-        4. **Pattern Recognition**: Groups similar complaints and identifies trends
-        5. **Actionable Insights**: Prioritizes findings by frequency and impact
+        **1. Fuzzy String Matching**
+        - Handles misspellings like "EXELLENT" → "EXCELLENT"
+        - Uses Levenshtein distance algorithm
+        - Configurable sensitivity threshold
+        
+        **2. Text Preprocessing & Stemming**
+        - Reduces words to root forms: "helpful"/"helping" → "help"
+        - Removes stop words and normalizes text
+        - Handles contractions and punctuation
+        
+        **3. Expanded Keyword Dictionaries**
+        - Primary keywords + common variations + misspellings
+        - Synonyms: "translator" ↔ "interpreter"
+        - Phrase matching: "radio playing", "wasn't wearing a shirt"
+        
+        **4. Multi-Level Matching Strategy**
+        - Direct substring matching (fastest)
+        - Stemmed keyword matching
+        - Fuzzy matching for misspellings
+        - Partial ratio matching for phrases
+        
+        **5. Hierarchical Classification**
+        - Technical issues prioritized first
+        - Service issues second
+        - Positive feedback last
         
         **Issue Categories Detected:**
-        - 🔴 Connection Issues
-        - 🔴 Disconnection Problems  
-        - 🔴 Audio/Video Quality
-        - 🔴 Professionalism Issues
-        - 🔴 Accuracy/Speed Problems
-        - 🔴 Availability Issues
-        - 🟢 Excellent Service
-        - 🟢 Professional Behavior
-        - 🟢 Helpful/Patient Feedback
+        - 🔴 Connection Issues (with variants like "conect", "conectivity")
+        - 🔴 Disconnection Problems (including "randomly ended", "hung up")
+        - 🔴 Audio/Video Quality (including "radio playing", "hard time hearing")
+        - 🔴 Professionalism Issues (including "wasn't wearing a shirt")
+        - 🔴 Accuracy/Speed Problems (including misspellings of "interpreter")
+        - 🔴 Availability Issues (including "just a chair", "person not there")
+        - 🟢 Excellent Service (including "EXELLENT", "awsome")
+        - 🟢 Professional Behavior (including "profesional", "well spoken")
+        - 🟢 Helpful/Patient Feedback (including "helpfull", "pacient")
         """)
 
 if __name__ == "__main__":
