@@ -1,55 +1,255 @@
 InterpreterId,interpreter_name,interpreter_info,total_feedback,issue_count,positive_count,issue_percentage,severity_score,analysis_timestamp
-"1,204,709",Julian David Vargas Segura (ICC),"Julian David Vargas Segura (ICC) (ID: 1,204,709)",5,5,0,100.0,13,2025-09-11 15:53:22
-"1,203,881",Sara Elisa Novoa Claro (ICC),"Sara Elisa Novoa Claro (ICC) (ID: 1,203,881)",2,2,0,100.0,6,2025-09-11 15:53:22
-"1,204,196",Julian Salazar (ICC),"Julian Salazar (ICC) (ID: 1,204,196)",1,1,0,100.0,5,2025-09-11 15:53:22
-"1,204,538",Luis Fernando Gonzalez Ramirez (ICC),"Luis Fernando Gonzalez Ramirez (ICC) (ID: 1,204,538)",1,1,0,100.0,5,2025-09-11 15:53:22
-"1,204,578",Carlos Alberto Martinez Alegria (ICC),"Carlos Alberto Martinez Alegria (ICC) (ID: 1,204,578)",1,1,0,100.0,5,2025-09-11 15:53:22
-"1,204,617",Maria Juliana Lopez Riveros (ICC),"Maria Juliana Lopez Riveros (ICC) (ID: 1,204,617)",2,2,0,100.0,5,2025-09-11 15:53:22
-"1,204,539",Daniel Blandon Cardona (ICC),"Daniel Blandon Cardona (ICC) (ID: 1,204,539)",3,2,1,66.7,5,2025-09-11 15:53:22
-"1,204,707",Jonathan Isai Valladares Sanchez (ICC),"Jonathan Isai Valladares Sanchez (ICC) (ID: 1,204,707)",1,1,0,100.0,4,2025-09-11 15:53:22
-"1,204,309",Andersson Steve Rey Pabon (ICC),"Andersson Steve Rey Pabon (ICC) (ID: 1,204,309)",2,1,1,50.0,4,2025-09-11 15:53:22
-"1,204,561",Laura Valentina Guasca Arias (ICC),"Laura Valentina Guasca Arias (ICC) (ID: 1,204,561)",1,1,0,100.0,3,2025-09-11 15:53:22
-"1,203,846",Dulce Stephanníe Catún Guevara (ICC),"Dulce Stephanníe Catún Guevara (ICC) (ID: 1,203,846)",1,1,0,100.0,2,2025-09-11 15:53:22
-"1,204,581",Oscar Camilo Perez Mantilla (ICC),"Oscar Camilo Perez Mantilla (ICC) (ID: 1,204,581)",1,1,0,100.0,2,2025-09-11 15:53:22
-"1,203,426",Flavio Omero Monzon Acevedo (ICC),"Flavio Omero Monzon Acevedo (ICC) (ID: 1,203,426)",2,1,1,50.0,2,2025-09-11 15:53:22
-"1,203,880",Alicia Galeas (ICC),"Alicia Galeas (ICC) (ID: 1,203,880)",2,1,1,50.0,2,2025-09-11 15:53:22
-"1,204,630",Danner Murillo Riascos (ICC),"Danner Murillo Riascos (ICC) (ID: 1,204,630)",2,1,1,50.0,2,2025-09-11 15:53:22
-"1,204,676",Oscar Armando García (ICC),"Oscar Armando García (ICC) (ID: 1,204,676)",2,1,1,50.0,2,2025-09-11 15:53:22
-"1,204,431",Luis Arturo Tabares Echeverri (ICC),"Luis Arturo Tabares Echeverri (ICC) (ID: 1,204,431)",1,1,0,100.0,1,2025-09-11 15:53:22
-"1,204,535",Marcelo Daniel Velez Lastra (ICC),"Marcelo Daniel Velez Lastra (ICC) (ID: 1,204,535)",1,1,0,100.0,1,2025-09-11 15:53:22
-"1,204,680",Valentina Franco Villegas (ICC),"Valentina Franco Villegas (ICC) (ID: 1,204,680)",1,1,0,100.0,1,2025-09-11 15:53:22
-"1,203,839",Jorge David Morales Cux (ICC),"Jorge David Morales Cux (ICC) (ID: 1,203,839)",2,1,1,50.0,1,2025-09-11 15:53:22
-"1,202,587",Valeria Yaoska Mena Espinoza (ICC),"Valeria Yaoska Mena Espinoza (ICC) (ID: 1,202,587)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,202,907",Christian Eduardo Mieles Molina (ICC),"Christian Eduardo Mieles Molina (ICC) (ID: 1,202,907)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,203,823",Douglas Joaquin Sotelo Moraga (ICC),"Douglas Joaquin Sotelo Moraga (ICC) (ID: 1,203,823)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,203,826",Christopher Adrian Membreño Tellez (ICC),"Christopher Adrian Membreño Tellez (ICC) (ID: 1,203,826)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,203,873",Mayra Isabel Diaz Contreras (ICC),"Mayra Isabel Diaz Contreras (ICC) (ID: 1,203,873)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,203,946",Marco Antonio Lopez (ICC),"Marco Antonio Lopez (ICC) (ID: 1,203,946)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,173",Josued Martinez (ICC),"Josued Martinez (ICC) (ID: 1,204,173)",2,0,2,0.0,0,2025-09-11 15:53:22
-"1,204,217",Sebastian Machado (ICC),"Sebastian Machado (ICC) (ID: 1,204,217)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,242",Laura Victoria Alvarez Rodriguez (ICC),"Laura Victoria Alvarez Rodriguez (ICC) (ID: 1,204,242)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,247",Juan Felipe Vargas Garcia (ICC),"Juan Felipe Vargas Garcia (ICC) (ID: 1,204,247)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,313",Juan Camilo Torres Carrillo (ICC),"Juan Camilo Torres Carrillo (ICC) (ID: 1,204,313)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,323",Valeria Suarez Vasquez (ICC),"Valeria Suarez Vasquez (ICC) (ID: 1,204,323)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,324",Jheanpaul Alejandro Alfonzo Tarquini (ICC),"Jheanpaul Alejandro Alfonzo Tarquini (ICC) (ID: 1,204,324)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,336",Emsho Fidel Alvarado Mendoza (ICC),"Emsho Fidel Alvarado Mendoza (ICC) (ID: 1,204,336)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,513",Andres Felipe Alonso Rodriguez (ICC),"Andres Felipe Alonso Rodriguez (ICC) (ID: 1,204,513)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,528",Nicole Dayanna Avellaneda Molina (ICC),"Nicole Dayanna Avellaneda Molina (ICC) (ID: 1,204,528)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,529",Adonis Antonio Robelo Orozco (ICC),"Adonis Antonio Robelo Orozco (ICC) (ID: 1,204,529)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,536",Frank Anthony Nuñez Ramirez (ICC),"Frank Anthony Nuñez Ramirez (ICC) (ID: 1,204,536)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,543",Johana Andrea Alvarez Mendez (ICC),"Johana Andrea Alvarez Mendez (ICC) (ID: 1,204,543)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,574",Kelly Johana Restrepo Yepes (ICC),"Kelly Johana Restrepo Yepes (ICC) (ID: 1,204,574)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,585",Kevin Roberto Cruz Urbina (ICC),"Kevin Roberto Cruz Urbina (ICC) (ID: 1,204,585)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,593",Jean Pablo Ardila Arguello (ICC),"Jean Pablo Ardila Arguello (ICC) (ID: 1,204,593)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,626",Juan Francisco Sanchez Herrera (ICC),"Juan Francisco Sanchez Herrera (ICC) (ID: 1,204,626)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,627",Viviana Serrano Gomez (ICC),"Viviana Serrano Gomez (ICC) (ID: 1,204,627)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,628",Diana Marcela Valencia Garcia (ICC),"Diana Marcela Valencia Garcia (ICC) (ID: 1,204,628)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,635",Andres Felipe Castro Vargas (ICC),"Andres Felipe Castro Vargas (ICC) (ID: 1,204,635)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,664",Emilio Asuncion Molina Rodriguez (ICC),"Emilio Asuncion Molina Rodriguez (ICC) (ID: 1,204,664)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,666",Chad Rony Danilo Duarte Acosta (ICC),"Chad Rony Danilo Duarte Acosta (ICC) (ID: 1,204,666)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,667",Juan Diego Rodriguez Ricaurte (ICC),"Juan Diego Rodriguez Ricaurte (ICC) (ID: 1,204,667)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,669",Andres Felipe Londoño Mejía (ICC),"Andres Felipe Londoño Mejía (ICC) (ID: 1,204,669)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,670",Juan Felipe Morales Mesa (ICC),"Juan Felipe Morales Mesa (ICC) (ID: 1,204,670)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,681",Argelia Del Toro Ochoa (ICC),"Argelia Del Toro Ochoa (ICC) (ID: 1,204,681)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,688",Gustavo III Gomez Pinzon (ICC),"Gustavo III Gomez Pinzon (ICC) (ID: 1,204,688)",1,0,1,0.0,0,2025-09-11 15:53:22
-"1,204,713",Norma Yanina Zapata Rodas (ICC),"Norma Yanina Zapata Rodas (ICC) (ID: 1,204,713)",1,0,1,0.0,0,2025-09-11 15:53:22
+11427,Dulce Stephannie Catun Guevara,Dulce Stephannie Catun Guevara (ID: 11427),14,13,1,92.9,31,2025-09-12 21:04:51
+9693,Andres Felipe Caro Aguilar,Andres Felipe Caro Aguilar (ID: 9693),11,10,1,90.9,28,2025-09-12 21:04:51
+13212,Kevin Oswaldo Lopez Berrios,Kevin Oswaldo Lopez Berrios (ID: 13212),8,7,1,87.5,22,2025-09-12 21:04:51
+14931,Ariel Ayala Figueroa,Ariel Ayala Figueroa (ID: 14931),12,10,2,83.3,17,2025-09-12 21:04:51
+14628,Juan Sebastian Rueda Bastidas,Juan Sebastian Rueda Bastidas (ID: 14628),9,6,3,66.7,16,2025-09-12 21:04:51
+11430,Julio Ernesto Nunez Zavala,Julio Ernesto Nunez Zavala (ID: 11430),10,9,1,90.0,15,2025-09-12 21:04:51
+17498,Marcelo Daniel  Velez Lastra,Marcelo Daniel  Velez Lastra (ID: 17498),14,10,4,71.4,15,2025-09-12 21:04:51
+16946,Joel Elias  Gutierrez Ventura,Joel Elias  Gutierrez Ventura (ID: 16946),16,9,7,56.2,15,2025-09-12 21:04:51
+17900,Daniel Enrique Sepulveda Hernandez,Daniel Enrique Sepulveda Hernandez (ID: 17900),10,7,3,70.0,14,2025-09-12 21:04:51
+20479,Franco Alain Moros Luque,Franco Alain Moros Luque (ID: 20479),15,8,7,53.3,14,2025-09-12 21:04:51
+12334,Yisack Alejandro Bustillo Sanchez,Yisack Alejandro Bustillo Sanchez (ID: 12334),16,5,11,31.2,14,2025-09-12 21:04:51
+20521,Harri Andres Dolmus Arauz,Harri Andres Dolmus Arauz (ID: 20521),14,10,4,71.4,13,2025-09-12 21:04:51
+19035,Maria del Mar Uhia Zalabata,Maria del Mar Uhia Zalabata (ID: 19035),11,6,5,54.5,13,2025-09-12 21:04:51
+11935,Irving Aaron Ochoa Valdovinos,Irving Aaron Ochoa Valdovinos (ID: 11935),11,4,7,36.4,13,2025-09-12 21:04:51
+12977,Maria Alejandra Parra Guevara,Maria Alejandra Parra Guevara (ID: 12977),13,8,5,61.5,12,2025-09-12 21:04:51
+17861,Juan Felipe Morales Mesa,Juan Felipe Morales Mesa (ID: 17861),13,8,5,61.5,12,2025-09-12 21:04:51
+19995,Marlon Gamaliel Santos Marroquin,Marlon Gamaliel Santos Marroquin (ID: 19995),10,6,4,60.0,12,2025-09-12 21:04:51
+19620,Juan Diego Guerrero Mejia,Juan Diego Guerrero Mejia (ID: 19620),15,8,7,53.3,12,2025-09-12 21:04:51
+16918,Yarel Juliana  Quintero Silva,Yarel Juliana  Quintero Silva (ID: 16918),12,6,6,50.0,12,2025-09-12 21:04:51
+10478,Francisco Javier Ballestero Lescano,Francisco Javier Ballestero Lescano (ID: 10478),11,5,6,45.5,12,2025-09-12 21:04:51
+16934,Juan Sebastian  Pacheco Montalvo,Juan Sebastian  Pacheco Montalvo (ID: 16934),11,5,6,45.5,12,2025-09-12 21:04:51
+16925,Waleska Paola  Zepeda Maradiaga,Waleska Paola  Zepeda Maradiaga (ID: 16925),9,4,5,44.4,12,2025-09-12 21:04:51
+14636,Jorge Eduardo Chicaiza Yela,Jorge Eduardo Chicaiza Yela (ID: 14636),12,5,7,41.7,12,2025-09-12 21:04:51
+12332,Jimmy Alejandro Ramos Suarez,Jimmy Alejandro Ramos Suarez (ID: 12332),8,5,3,62.5,11,2025-09-12 21:04:51
+13793,Cristhian Eduardo Oliveros Castro,Cristhian Eduardo Oliveros Castro (ID: 13793),10,6,4,60.0,11,2025-09-12 21:04:51
+13953,Jonathan Obed Flores Cruz,Jonathan Obed Flores Cruz (ID: 13953),10,6,4,60.0,11,2025-09-12 21:04:51
+19025,Ricardo Betancourt Contreras,Ricardo Betancourt Contreras (ID: 19025),9,5,4,55.6,11,2025-09-12 21:04:51
+16295,Andres Felipe  Londono Mejia,Andres Felipe  Londono Mejia (ID: 16295),11,5,6,45.5,11,2025-09-12 21:04:51
+12333,Alicia Maria Galeas Aguilar,Alicia Maria Galeas Aguilar (ID: 12333),7,6,1,85.7,10,2025-09-12 21:04:51
+14627,Danner Murillo Riascos,Danner Murillo Riascos (ID: 14627),6,5,1,83.3,10,2025-09-12 21:04:51
+16568,Maria Fernanda  Garzon Ardila,Maria Fernanda  Garzon Ardila (ID: 16568),8,6,2,75.0,10,2025-09-12 21:04:51
+15007,Juan Camilo Tobon Gomez,Juan Camilo Tobon Gomez (ID: 15007),9,6,3,66.7,10,2025-09-12 21:04:51
+17062,Miguel Angel  Cardenas Jaramillo,Miguel Angel  Cardenas Jaramillo (ID: 17062),8,5,3,62.5,10,2025-09-12 21:04:51
+19999,Andres Felipe Urbina Velasquez,Andres Felipe Urbina Velasquez (ID: 19999),10,6,4,60.0,10,2025-09-12 21:04:51
+20522,Andrea Estefania Cruz Meza,Andrea Estefania Cruz Meza (ID: 20522),12,6,6,50.0,10,2025-09-12 21:04:51
+19036,Juan Andres Villamizar Luna,Juan Andres Villamizar Luna (ID: 19036),14,6,8,42.9,10,2025-09-12 21:04:51
+10139,Cristian Ricardo Rodriguez Estupinan,Cristian Ricardo Rodriguez Estupinan (ID: 10139),15,5,10,33.3,10,2025-09-12 21:04:51
+10327,Angela Esperanza Flores Fernandez,Angela Esperanza Flores Fernandez (ID: 10327),15,4,11,26.7,10,2025-09-12 21:04:51
+14943,Theresa Garcia Rodriguez,Theresa Garcia Rodriguez (ID: 14943),8,5,3,62.5,9,2025-09-12 21:04:51
+11407,Oscar Armando Garcia,Oscar Armando Garcia (ID: 11407),6,3,3,50.0,9,2025-09-12 21:04:51
+13512,Kristopher Fernando Silva Salazar,Kristopher Fernando Silva Salazar (ID: 13512),6,3,3,50.0,9,2025-09-12 21:04:51
+19996,Astrid Samantha Sandoval Martinez,Astrid Samantha Sandoval Martinez (ID: 19996),10,5,5,50.0,9,2025-09-12 21:04:51
+17884,Leonardo Asprilla Manzano,Leonardo Asprilla Manzano (ID: 17884),14,6,8,42.9,9,2025-09-12 21:04:51
+14603,Duban Ricardo  Suarez Losada,Duban Ricardo  Suarez Losada (ID: 14603),10,4,6,40.0,9,2025-09-12 21:04:51
+19638,Irving Janniel Rodriguez Soto,Irving Janniel Rodriguez Soto (ID: 19638),12,4,8,33.3,9,2025-09-12 21:04:51
+17500,Gabriel Alejandro  Saravia Ugarte,Gabriel Alejandro  Saravia Ugarte (ID: 17500),12,3,9,25.0,9,2025-09-12 21:04:51
+13506,Elisa Sierra Perez,Elisa Sierra Perez (ID: 13506),9,5,4,55.6,8,2025-09-12 21:04:51
+19991,Juan Pablo Otero Rojas,Juan Pablo Otero Rojas (ID: 19991),12,6,6,50.0,8,2025-09-12 21:04:51
+16562,Santiago Ivan  Perez Riveros,Santiago Ivan  Perez Riveros (ID: 16562),5,2,3,40.0,8,2025-09-12 21:04:51
+16928,Cesar Camilo Alzate Salazar,Cesar Camilo Alzate Salazar (ID: 16928),13,5,8,38.5,8,2025-09-12 21:04:51
+20483,Cindy Nathaly Oyola Rodriguez,Cindy Nathaly Oyola Rodriguez (ID: 20483),18,6,12,33.3,8,2025-09-12 21:04:51
+9522,Anthony Sebastian Oviedo Cango,Anthony Sebastian Oviedo Cango (ID: 9522),4,3,1,75.0,7,2025-09-12 21:04:51
+14651,Jonathan Isai Valladares Sanchez,Jonathan Isai Valladares Sanchez (ID: 14651),8,5,3,62.5,7,2025-09-12 21:04:51
+9190,Edgar Stephen Tellez Garay,Edgar Stephen Tellez Garay (ID: 9190),5,3,2,60.0,7,2025-09-12 21:04:51
+12976,Julio Jose Montoya Zuleta,Julio Jose Montoya Zuleta (ID: 12976),5,3,2,60.0,7,2025-09-12 21:04:51
+14594,Carlos Alberto  Martinez Alegria,Carlos Alberto  Martinez Alegria (ID: 14594),5,3,2,60.0,7,2025-09-12 21:04:51
+19038,Jheanpaul Alejandro Alfonzo Tarquini,Jheanpaul Alejandro Alfonzo Tarquini (ID: 19038),10,6,4,60.0,7,2025-09-12 21:04:51
+14217,Alejandro Cobo Cano,Alejandro Cobo Cano (ID: 14217),8,4,4,50.0,7,2025-09-12 21:04:51
+17404,Daniela Castellanos Giraldo,Daniela Castellanos Giraldo (ID: 17404),6,3,3,50.0,7,2025-09-12 21:04:51
+17896,Cristian Javier Casignia Vasconez,Cristian Javier Casignia Vasconez (ID: 17896),11,5,6,45.5,7,2025-09-12 21:04:51
+14632,Maria Juliana Lopez Riveros,Maria Juliana Lopez Riveros (ID: 14632),14,6,8,42.9,7,2025-09-12 21:04:51
+16949,Alexander  Patino Rojas,Alexander  Patino Rojas (ID: 16949),7,3,4,42.9,7,2025-09-12 21:04:51
+19637,Alison Dahiann Real Losada,Alison Dahiann Real Losada (ID: 19637),12,5,7,41.7,7,2025-09-12 21:04:51
+13200,Carlos Eduardo Urizar Perez,Carlos Eduardo Urizar Perez (ID: 13200),10,4,6,40.0,7,2025-09-12 21:04:51
+17888,Kiupsa Dayanary Lopez Ruiz,Kiupsa Dayanary Lopez Ruiz (ID: 17888),10,4,6,40.0,7,2025-09-12 21:04:51
+18997,Scott Rogier Fonseca Vado,Scott Rogier Fonseca Vado (ID: 18997),10,4,6,40.0,7,2025-09-12 21:04:51
+17850,Manuel Ricardo Hernandez Gonzalez,Manuel Ricardo Hernandez Gonzalez (ID: 17850),13,5,8,38.5,7,2025-09-12 21:04:51
+12504,Mayra Isabel Diaz Contreras,Mayra Isabel Diaz Contreras (ID: 12504),9,3,6,33.3,7,2025-09-12 21:04:51
+9895,Luis Gerardo Noj Avendano,Luis Gerardo Noj Avendano (ID: 9895),10,3,7,30.0,7,2025-09-12 21:04:51
+9901,Julian David Salazar Towers,Julian David Salazar Towers (ID: 9901),10,3,7,30.0,7,2025-09-12 21:04:51
+12327,Santiago Bautista Espinosa,Santiago Bautista Espinosa (ID: 12327),17,2,15,11.8,7,2025-09-12 21:04:51
+16303,Laura Katherin Chaves Sorza,Laura Katherin Chaves Sorza (ID: 16303),2,2,0,100.0,6,2025-09-12 21:04:51
+17501,Adonis Antonio Robelo Orozco,Adonis Antonio Robelo Orozco (ID: 17501),3,3,0,100.0,6,2025-09-12 21:04:51
+16311,Santiago  Celis Duarte,Santiago  Celis Duarte (ID: 16311),5,4,1,80.0,6,2025-09-12 21:04:51
+16317,Andres Felipe  Alonso Rodriguez,Andres Felipe  Alonso Rodriguez (ID: 16317),8,5,3,62.5,6,2025-09-12 21:04:51
+9305,Valeria Yaoska Mena Espinoza,Valeria Yaoska Mena Espinoza (ID: 9305),5,3,2,60.0,6,2025-09-12 21:04:51
+9581,Joel Andres Galvez Talarico,Joel Andres Galvez Talarico (ID: 9581),7,4,3,57.1,6,2025-09-12 21:04:51
+16313,Mario Alejandro  Valencia Varela,Mario Alejandro  Valencia Varela (ID: 16313),10,5,5,50.0,6,2025-09-12 21:04:51
+16312,Valentina  Franco Villegas,Valentina  Franco Villegas (ID: 16312),9,4,5,44.4,6,2025-09-12 21:04:51
+13513,Sebastian Machado Gonzalez,Sebastian Machado Gonzalez (ID: 13513),7,3,4,42.9,6,2025-09-12 21:04:51
+16567,Luis Fernando Gonzalez Ramirez,Luis Fernando Gonzalez Ramirez (ID: 16567),7,3,4,42.9,6,2025-09-12 21:04:51
+13198,Cristiam Yake Martinez Medina,Cristiam Yake Martinez Medina (ID: 13198),10,4,6,40.0,6,2025-09-12 21:04:51
+20000,Jorge Arley Jaramillo Valoyes,Jorge Arley Jaramillo Valoyes (ID: 20000),13,5,8,38.5,6,2025-09-12 21:04:51
+15022,Alma Lucia Bernal Ferrer,Alma Lucia Bernal Ferrer (ID: 15022),8,3,5,37.5,6,2025-09-12 21:04:51
+9580,Maria Camila Baron Suarez,Maria Camila Baron Suarez (ID: 9580),9,3,6,33.3,6,2025-09-12 21:04:51
+10475,Ruben Dario Reyes Gomez,Ruben Dario Reyes Gomez (ID: 10475),9,3,6,33.3,6,2025-09-12 21:04:51
+12326,Ninibeth Paola Linares Canizalez,Ninibeth Paola Linares Canizalez (ID: 12326),12,4,8,33.3,6,2025-09-12 21:04:51
+13965,Juan Camilo Torres Carrillo,Juan Camilo Torres Carrillo (ID: 13965),9,3,6,33.3,6,2025-09-12 21:04:51
+17851,Emilio Asuncion Molina Rodriguez,Emilio Asuncion Molina Rodriguez (ID: 17851),10,3,7,30.0,6,2025-09-12 21:04:51
+20445,Josue Daniel Arevalo Mendez,Josue Daniel Arevalo Mendez (ID: 20445),12,3,9,25.0,6,2025-09-12 21:04:51
+20523,Natalia Torres Pacheco,Natalia Torres Pacheco (ID: 20523),12,2,10,16.7,6,2025-09-12 21:04:51
+19992,Heber Alfonso Vasquez Lopez,Heber Alfonso Vasquez Lopez (ID: 19992),19,3,16,15.8,6,2025-09-12 21:04:51
+11586,Flavio Omero Monzon Acevedo,Flavio Omero Monzon Acevedo (ID: 11586),6,5,1,83.3,5,2025-09-12 21:04:51
+12325,Marco Antonio Lopez Lopez,Marco Antonio Lopez Lopez (ID: 12325),5,4,1,80.0,5,2025-09-12 21:04:51
+15416,Andersson Steve  Rey Pabon,Andersson Steve  Rey Pabon (ID: 15416),4,3,1,75.0,5,2025-09-12 21:04:51
+13202,Carla Valentina Rodriguez Guerra,Carla Valentina Rodriguez Guerra (ID: 13202),5,3,2,60.0,5,2025-09-12 21:04:51
+16304,Daniel Alejandro  Borda Castillo,Daniel Alejandro  Borda Castillo (ID: 16304),5,3,2,60.0,5,2025-09-12 21:04:51
+14645,Julian David Vargas Segura,Julian David Vargas Segura (ID: 14645),7,4,3,57.1,5,2025-09-12 21:04:51
+16915,David  Nustes Pinzon,David  Nustes Pinzon (ID: 16915),7,4,3,57.1,5,2025-09-12 21:04:51
+9584,Lucas Maximiliano Carranza,Lucas Maximiliano Carranza (ID: 9584),8,4,4,50.0,5,2025-09-12 21:04:51
+13504,Juan Camilo Perdomo Vasquez,Juan Camilo Perdomo Vasquez (ID: 13504),8,4,4,50.0,5,2025-09-12 21:04:51
+16308,Gladys Odette  Revolorio Gordillo,Gladys Odette  Revolorio Gordillo (ID: 16308),6,3,3,50.0,5,2025-09-12 21:04:51
+17885,Nicolas Cardenas Ussa,Nicolas Cardenas Ussa (ID: 17885),8,4,4,50.0,5,2025-09-12 21:04:51
+15017,Silvia Maria Escobar Molina,Silvia Maria Escobar Molina (ID: 15017),11,5,6,45.5,5,2025-09-12 21:04:51
+17496,Valeria Aparicio Barrero,Valeria Aparicio Barrero (ID: 17496),7,3,4,42.9,5,2025-09-12 21:04:51
+12975,Juan Andres Angarita Ortiz,Juan Andres Angarita Ortiz (ID: 12975),5,2,3,40.0,5,2025-09-12 21:04:51
+14631,Andres Felipe Castro Vargas,Andres Felipe Castro Vargas (ID: 14631),10,4,6,40.0,5,2025-09-12 21:04:51
+15020,Astrid Yolima Palacios Herrera,Astrid Yolima Palacios Herrera (ID: 15020),12,4,8,33.3,5,2025-09-12 21:04:51
+15411,Nicole Dayanna  Avellaneda Molina,Nicole Dayanna  Avellaneda Molina (ID: 15411),6,2,4,33.3,5,2025-09-12 21:04:51
+16916,Gabriela  Jara Sastoque,Gabriela  Jara Sastoque (ID: 16916),9,3,6,33.3,5,2025-09-12 21:04:51
+9889,David Alejandro Contreras Arevalo,David Alejandro Contreras Arevalo (ID: 9889),7,2,5,28.6,5,2025-09-12 21:04:51
+10340,Yasmin Elizabeth Salguero Quinonez,Yasmin Elizabeth Salguero Quinonez (ID: 10340),7,2,5,28.6,5,2025-09-12 21:04:51
+16933,Kelly Johana  Restrepo Yepes,Kelly Johana  Restrepo Yepes (ID: 16933),7,2,5,28.6,5,2025-09-12 21:04:51
+13951,Gabriel Esteban Espana Julio,Gabriel Esteban Espana Julio (ID: 13951),8,2,6,25.0,5,2025-09-12 21:04:51
+14635,Josue David Ortega Sanabria,Josue David Ortega Sanabria (ID: 14635),12,3,9,25.0,5,2025-09-12 21:04:51
+16309,Isaias Antonio  Garcia Montes,Isaias Antonio  Garcia Montes (ID: 16309),8,2,6,25.0,5,2025-09-12 21:04:51
+17887,Rubi Liliana Ortega Gallegos,Rubi Liliana Ortega Gallegos (ID: 17887),13,3,10,23.1,5,2025-09-12 21:04:51
+19811,Isabella Rose Rodriguez Martinez,Isabella Rose Rodriguez Martinez (ID: 19811),20,4,16,20.0,5,2025-09-12 21:04:51
+19641,Jerald Martin Morales,Jerald Martin Morales (ID: 19641),18,3,15,16.7,5,2025-09-12 21:04:51
+16910,Alejandro  Osorio Sepulveda,Alejandro  Osorio Sepulveda (ID: 16910),14,2,12,14.3,5,2025-09-12 21:04:51
+13199,Carlos Andres Rodriguez Orozco,Carlos Andres Rodriguez Orozco (ID: 13199),3,3,0,100.0,4,2025-09-12 21:04:51
+9088,Juan Pablo Deutsch Rincon,Juan Pablo Deutsch Rincon (ID: 9088),4,3,1,75.0,4,2025-09-12 21:04:51
+9891,Antonny Steve Garcia Castro,Antonny Steve Garcia Castro (ID: 9891),4,3,1,75.0,4,2025-09-12 21:04:51
+14663,Valeria  Suarez Vasquez,Valeria  Suarez Vasquez (ID: 14663),6,4,2,66.7,4,2025-09-12 21:04:51
+12978,Joaquin Leonardo Barros Romero,Joaquin Leonardo Barros Romero (ID: 12978),5,3,2,60.0,4,2025-09-12 21:04:51
+15412,Yeni Raquel  Hernandez Hernandez,Yeni Raquel  Hernandez Hernandez (ID: 15412),5,3,2,60.0,4,2025-09-12 21:04:51
+16575,Nicolle Marisela  Orellana Espinal,Nicolle Marisela  Orellana Espinal (ID: 16575),5,3,2,60.0,4,2025-09-12 21:04:51
+13197,Josue David Martinez Martinez,Josue David Martinez Martinez (ID: 13197),7,4,3,57.1,4,2025-09-12 21:04:51
+16576,Luis Daniel  Almanza Lobo,Luis Daniel  Almanza Lobo (ID: 16576),6,3,3,50.0,4,2025-09-12 21:04:51
+7136,Camilo Villamizar,Camilo Villamizar (ID: 7136),7,3,4,42.9,4,2025-09-12 21:04:51
+17886,Luis Miguel Parra Arango,Luis Miguel Parra Arango (ID: 17886),7,3,4,42.9,4,2025-09-12 21:04:51
+11428,Willy Abraham Mendez Osorio,Willy Abraham Mendez Osorio (ID: 11428),10,4,6,40.0,4,2025-09-12 21:04:51
+13954,Jacob Arias Salazar,Jacob Arias Salazar (ID: 13954),11,4,7,36.4,4,2025-09-12 21:04:51
+15414,Frank Anthony  Nunez Ramirez,Frank Anthony  Nunez Ramirez (ID: 15414),11,4,7,36.4,4,2025-09-12 21:04:51
+11587,Miriam Lisbeth Cifuentes Estrada,Miriam Lisbeth Cifuentes Estrada (ID: 11587),9,3,6,33.3,4,2025-09-12 21:04:51
+13731,Maria Camila Pinzon Lopez,Maria Camila Pinzon Lopez (ID: 13731),9,3,6,33.3,4,2025-09-12 21:04:51
+16298,Rafael Emilio  Hernandez Bustillo,Rafael Emilio  Hernandez Bustillo (ID: 16298),9,3,6,33.3,4,2025-09-12 21:04:51
+16574,Keren Daniela  Ajquill Alvarez,Keren Daniela  Ajquill Alvarez (ID: 16574),10,3,7,30.0,4,2025-09-12 21:04:51
+16921,Marg Randy  Rodriguez Guerrero,Marg Randy  Rodriguez Guerrero (ID: 16921),10,3,7,30.0,4,2025-09-12 21:04:51
+20003,Enrique Espinal Soriano,Enrique Espinal Soriano (ID: 20003),14,4,10,28.6,4,2025-09-12 21:04:51
+16297,Chad Rony Danilo  Duarte Acosta,Chad Rony Danilo  Duarte Acosta (ID: 16297),11,3,8,27.3,4,2025-09-12 21:04:51
+13950,Paula Andrea Otalvaro Ramirez,Paula Andrea Otalvaro Ramirez (ID: 13950),4,1,3,25.0,4,2025-09-12 21:04:51
+17893,Carlos Alejandro Revolorio Guzman,Carlos Alejandro Revolorio Guzman (ID: 17893),12,3,9,25.0,4,2025-09-12 21:04:51
+19622,Brayan Smith Gil Cardenas,Brayan Smith Gil Cardenas (ID: 19622),13,3,10,23.1,4,2025-09-12 21:04:51
+16913,Daniela  Correa Londono,Daniela  Correa Londono (ID: 16913),9,2,7,22.2,4,2025-09-12 21:04:51
+15016,Daniela Clementina Miranda Ericastilla,Daniela Clementina Miranda Ericastilla (ID: 15016),14,3,11,21.4,4,2025-09-12 21:04:51
+19092,Daniela Estrella de la Cruz Diaz,Daniela Estrella de la Cruz Diaz (ID: 19092),20,4,16,20.0,4,2025-09-12 21:04:51
+15021,Laura Juliana Hernandez Grimaldos,Laura Juliana Hernandez Grimaldos (ID: 15021),17,3,14,17.6,4,2025-09-12 21:04:51
+16306,Diana Marcela  Valencia Garcia,Diana Marcela  Valencia Garcia (ID: 16306),17,3,14,17.6,4,2025-09-12 21:04:51
+11937,Yomary Beatriz Garcia Hernandez,Yomary Beatriz Garcia Hernandez (ID: 11937),12,2,10,16.7,4,2025-09-12 21:04:51
+16318,Rosa Alba  Ordonez Avila,Rosa Alba  Ordonez Avila (ID: 16318),7,1,6,14.3,4,2025-09-12 21:04:51
+19034,Osman Ernesto Izaguirre Caceres,Osman Ernesto Izaguirre Caceres (ID: 19034),7,1,6,14.3,4,2025-09-12 21:04:51
+10008,Hector Fernando Baron Lizarazo,Hector Fernando Baron Lizarazo (ID: 10008),8,1,7,12.5,4,2025-09-12 21:04:51
+9526,Christian Eduardo Mieles Molina,Christian Eduardo Mieles Molina (ID: 9526),2,2,0,100.0,3,2025-09-12 21:04:51
+14914,Juan Carlos Mejia Ramirez,Juan Carlos Mejia Ramirez (ID: 14914),1,1,0,100.0,3,2025-09-12 21:04:51
+8564,Sarah Estrada Segura,Sarah Estrada Segura (ID: 8564),3,2,1,66.7,3,2025-09-12 21:04:51
+10309,Valerie Monica Mayte Arreaga Torres,Valerie Monica Mayte Arreaga Torres (ID: 10309),3,2,1,66.7,3,2025-09-12 21:04:51
+9187,Juan Sebastian Lopez Gallo,Juan Sebastian Lopez Gallo (ID: 9187),6,3,3,50.0,3,2025-09-12 21:04:51
+15008,Diana Brand Duran,Diana Brand Duran (ID: 15008),4,2,2,50.0,3,2025-09-12 21:04:51
+11426,Mario Enrique Wug Andrade,Mario Enrique Wug Andrade (ID: 11426),7,3,4,42.9,3,2025-09-12 21:04:51
+15019,Gustavo III Gomez Pinzon,Gustavo III Gomez Pinzon (ID: 15019),7,3,4,42.9,3,2025-09-12 21:04:51
+9577,Gerardo Luis de Leon Rodriguez,Gerardo Luis de Leon Rodriguez (ID: 9577),5,2,3,40.0,3,2025-09-12 21:04:51
+12322,Johan Arley Celis Ballen,Johan Arley Celis Ballen (ID: 12322),5,2,3,40.0,3,2025-09-12 21:04:51
+13967,Aileen Isamar Castro Loaisiga,Aileen Isamar Castro Loaisiga (ID: 13967),5,2,3,40.0,3,2025-09-12 21:04:51
+15015,Fabio Andres Membreno Hernandez,Fabio Andres Membreno Hernandez (ID: 15015),5,2,3,40.0,3,2025-09-12 21:04:51
+17063,Sergio Alexis  Pimentel Lovos,Sergio Alexis  Pimentel Lovos (ID: 17063),5,2,3,40.0,3,2025-09-12 21:04:51
+7140,Ivan Correa,Ivan Correa (ID: 7140),8,3,5,37.5,3,2025-09-12 21:04:51
+19997,Jose Camilo Cadena Jaramillo,Jose Camilo Cadena Jaramillo (ID: 19997),9,3,6,33.3,3,2025-09-12 21:04:51
+20447,Daniel Felipe Guerra Grimaldo,Daniel Felipe Guerra Grimaldo (ID: 20447),6,2,4,33.3,3,2025-09-12 21:04:51
+16294,Maria Del Pilar  Bayer Jaime,Maria Del Pilar  Bayer Jaime (ID: 16294),10,3,7,30.0,3,2025-09-12 21:04:51
+8841,Daniela Arteaga Leon,Daniela Arteaga Leon (ID: 8841),7,2,5,28.6,3,2025-09-12 21:04:51
+16920,Kevin Roberto  Cruz Urbina,Kevin Roberto  Cruz Urbina (ID: 16920),7,2,5,28.6,3,2025-09-12 21:04:51
+11429,Maria Magdalena Penner,Maria Magdalena Penner (ID: 11429),9,2,7,22.2,3,2025-09-12 21:04:51
+12984,Brayan Alexander Donis Miranda,Brayan Alexander Donis Miranda (ID: 12984),9,2,7,22.2,3,2025-09-12 21:04:51
+14248,Evelyn Fabiola Lagos Amador,Evelyn Fabiola Lagos Amador (ID: 14248),22,3,19,13.6,3,2025-09-12 21:04:51
+14652,Sinia Sthefania Vargas Bulnes,Sinia Sthefania Vargas Bulnes (ID: 14652),18,2,16,11.1,3,2025-09-12 21:04:51
+13794,Ingrid Astrid Sanchez Rodriguez,Ingrid Astrid Sanchez Rodriguez (ID: 13794),2,2,0,100.0,2,2025-09-12 21:04:51
+14653,Luis Arturo Tabares Echeverri,Luis Arturo Tabares Echeverri (ID: 14653),1,1,0,100.0,2,2025-09-12 21:04:51
+15422,Johana Andrea Alvarez Mendez,Johana Andrea Alvarez Mendez (ID: 15422),2,2,0,100.0,2,2025-09-12 21:04:51
+14245,Laura Valentina Guasca Arias,Laura Valentina Guasca Arias (ID: 14245),4,2,2,50.0,2,2025-09-12 21:04:51
+15023,Laura Victoria Alvarez Rodriguez,Laura Victoria Alvarez Rodriguez (ID: 15023),2,1,1,50.0,2,2025-09-12 21:04:51
+10471,Jorge David Morales Cux,Jorge David Morales Cux (ID: 10471),5,2,3,40.0,2,2025-09-12 21:04:51
+17406,Angee Paola Lopera Restrepo,Angee Paola Lopera Restrepo (ID: 17406),5,2,3,40.0,2,2025-09-12 21:04:51
+19635,Damaris Abigail Reyes Garcia,Damaris Abigail Reyes Garcia (ID: 19635),5,2,3,40.0,2,2025-09-12 21:04:51
+9695,Francisco Eduardo Miranda Leuschner,Francisco Eduardo Miranda Leuschner (ID: 9695),7,2,5,28.6,2,2025-09-12 21:04:51
+14639,Juan Sebastian Cabrales Bernal,Juan Sebastian Cabrales Bernal (ID: 14639),7,2,5,28.6,2,2025-09-12 21:04:51
+19640,Sebastian Reyes Yepes,Sebastian Reyes Yepes (ID: 19640),7,2,5,28.6,2,2025-09-12 21:04:51
+13969,Jose Daniel Gonzalez Abad,Jose Daniel Gonzalez Abad (ID: 13969),8,2,6,25.0,2,2025-09-12 21:04:51
+14640,María Camila Lopez Galvan,María Camila Lopez Galvan (ID: 14640),8,2,6,25.0,2,2025-09-12 21:04:51
+16301,Dario Esteban  Zuniga Gongora,Dario Esteban  Zuniga Gongora (ID: 16301),4,1,3,25.0,2,2025-09-12 21:04:51
+14637,Juan Pablo Malaver Huepa,Juan Pablo Malaver Huepa (ID: 14637),9,2,7,22.2,2,2025-09-12 21:04:51
+9790,Christopher Adrian Membreno Tellez,Christopher Adrian Membreno Tellez (ID: 9790),5,1,4,20.0,2,2025-09-12 21:04:51
+10477,Sara Elisa Novoa Claro,Sara Elisa Novoa Claro (ID: 10477),6,1,5,16.7,2,2025-09-12 21:04:51
+10480,Luis Felipe Naranjo Charry,Luis Felipe Naranjo Charry (ID: 10480),12,2,10,16.7,2,2025-09-12 21:04:51
+14942,Ana Marcela Gomez Zavaleta,Ana Marcela Gomez Zavaleta (ID: 14942),6,1,5,16.7,2,2025-09-12 21:04:51
+17894,Andres Felipe Salazar Acosta,Andres Felipe Salazar Acosta (ID: 17894),14,2,12,14.3,2,2025-09-12 21:04:51
+16922,Jean Pablo  Ardila Arguello,Jean Pablo  Ardila Arguello (ID: 16922),15,2,13,13.3,2,2025-09-12 21:04:51
+10002,William David Rodas Simmonite,William David Rodas Simmonite (ID: 10002),8,1,7,12.5,2,2025-09-12 21:04:51
+14214,Alvaro Ignacio Parra Ibarra,Alvaro Ignacio Parra Ibarra (ID: 14214),8,1,7,12.5,2,2025-09-12 21:04:51
+12329,Andres Felipe Plaza Zapata,Andres Felipe Plaza Zapata (ID: 12329),10,1,9,10.0,2,2025-09-12 21:04:51
+17853,Juan Diego Rodriguez Ricaurte,Juan Diego Rodriguez Ricaurte (ID: 17853),10,1,9,10.0,2,2025-09-12 21:04:51
+14626,Edgardo Sebastian Bejarano Cardozo,Edgardo Sebastian Bejarano Cardozo (ID: 14626),22,2,20,9.1,2,2025-09-12 21:04:51
+15410,Cesar Camilo  Ortiz Rubiano,Cesar Camilo  Ortiz Rubiano (ID: 15410),11,1,10,9.1,2,2025-09-12 21:04:51
+14624,Juan Felipe Vargas Garcia,Juan Felipe Vargas Garcia (ID: 14624),1,1,0,100.0,1,2025-09-12 21:04:51
+14642,Nicols Daniel Caceres Gonzalez,Nicols Daniel Caceres Gonzalez (ID: 14642),1,1,0,100.0,1,2025-09-12 21:04:51
+16292,Hugo Saul Nino Lozano,Hugo Saul Nino Lozano (ID: 16292),1,1,0,100.0,1,2025-09-12 21:04:51
+16911,Aldemar Echeverry Martinez,Aldemar Echeverry Martinez (ID: 16911),1,1,0,100.0,1,2025-09-12 21:04:51
+21631,Claudia Lorena Reyes Gaitan,Claudia Lorena Reyes Gaitan (ID: 21631),1,1,0,100.0,1,2025-09-12 21:04:51
+11431,Santiago Albarran Garcia,Santiago Albarran Garcia (ID: 11431),2,1,1,50.0,1,2025-09-12 21:04:51
+14621,Santiago Andres Rodriguez Cortes,Santiago Andres Rodriguez Cortes (ID: 14621),2,1,1,50.0,1,2025-09-12 21:04:51
+9786,Federico Adrian Pennente,Federico Adrian Pennente (ID: 9786),3,1,2,33.3,1,2025-09-12 21:04:51
+9857,Carlos Ernesto Giron Alonso,Carlos Ernesto Giron Alonso (ID: 9857),5,1,4,20.0,1,2025-09-12 21:04:51
+14587,Argelia  Del Toro Ochoa,Argelia  Del Toro Ochoa (ID: 14587),5,1,4,20.0,1,2025-09-12 21:04:51
+14601,Oscar Camilo  Perez Mantilla,Oscar Camilo  Perez Mantilla (ID: 14601),6,1,5,16.7,1,2025-09-12 21:04:51
+15425,Jorge Andres Jimenez Diaz,Jorge Andres Jimenez Diaz (ID: 15425),6,1,5,16.7,1,2025-09-12 21:04:51
+20443,Pablo Jose Agreda Ayala,Pablo Jose Agreda Ayala (ID: 20443),6,1,5,16.7,1,2025-09-12 21:04:51
+16563,Isabella  Moreno Menco,Isabella  Moreno Menco (ID: 16563),7,1,6,14.3,1,2025-09-12 21:04:51
+17497,Brayan Sneyder  Parra Gomez,Brayan Sneyder  Parra Gomez (ID: 17497),7,1,6,14.3,1,2025-09-12 21:04:51
+14659,Juan Martin  Valencia Lopez,Juan Martin  Valencia Lopez (ID: 14659),8,1,7,12.5,1,2025-09-12 21:04:51
+19994,Luis Carlos Nunez Jarquin,Luis Carlos Nunez Jarquin (ID: 19994),8,1,7,12.5,1,2025-09-12 21:04:51
+19998,Jhon Rodriguez Carvajal,Jhon Rodriguez Carvajal (ID: 19998),8,1,7,12.5,1,2025-09-12 21:04:51
+20474,Benjamin Isaac Guerra Orellana,Benjamin Isaac Guerra Orellana (ID: 20474),8,1,7,12.5,1,2025-09-12 21:04:51
+14212,Norma Yanina Zapata Rodas,Norma Yanina Zapata Rodas (ID: 14212),9,1,8,11.1,1,2025-09-12 21:04:51
+16923,Heber Andres  Penalba Murillo,Heber Andres  Penalba Murillo (ID: 16923),9,1,8,11.1,1,2025-09-12 21:04:51
+17855,Julian Franco Morales,Julian Franco Morales (ID: 17855),9,1,8,11.1,1,2025-09-12 21:04:51
+13508,Maria Del Mar Pena Cuero,Maria Del Mar Pena Cuero (ID: 13508),10,1,9,10.0,1,2025-09-12 21:04:51
+19626,Ariam Dessire Blaguy Cordero,Ariam Dessire Blaguy Cordero (ID: 19626),10,1,9,10.0,1,2025-09-12 21:04:51
+14935,Juan Francisco Sanchez Herrera,Juan Francisco Sanchez Herrera (ID: 14935),12,1,11,8.3,1,2025-09-12 21:04:51
+16566,Nathalia Alexandra  Machuca Arevalo,Nathalia Alexandra  Machuca Arevalo (ID: 16566),16,1,15,6.2,1,2025-09-12 21:04:51
+8637,Alvaro Andres Portillo Brasil,Alvaro Andres Portillo Brasil (ID: 8637),4,0,4,0.0,0,2025-09-12 21:04:51
+9192,Roger Stiwar Jimenez Moore,Roger Stiwar Jimenez Moore (ID: 9192),1,0,1,0.0,0,2025-09-12 21:04:51
+9523,Jesus Antonio Araiza Trejo,Jesus Antonio Araiza Trejo (ID: 9523),6,0,6,0.0,0,2025-09-12 21:04:51
+10129,Joshua Levi Maldonado Calderon,Joshua Levi Maldonado Calderon (ID: 10129),2,0,2,0.0,0,2025-09-12 21:04:51
+12410,David Loaiza Lopez,David Loaiza Lopez (ID: 12410),3,0,3,0.0,0,2025-09-12 21:04:51
+13514,Josue Alexander Paz Alberto,Josue Alexander Paz Alberto (ID: 13514),5,0,5,0.0,0,2025-09-12 21:04:51
+13866,Juliana Urrutia Cedeno,Juliana Urrutia Cedeno (ID: 13866),3,0,3,0.0,0,2025-09-12 21:04:51
+13871,Elindeluz Andrea Oliveros Orozco,Elindeluz Andrea Oliveros Orozco (ID: 13871),11,0,11,0.0,0,2025-09-12 21:04:51
+13949,Santiago Bernal,Santiago Bernal (ID: 13949),6,0,6,0.0,0,2025-09-12 21:04:51
+14218,Liliana Esther Narvaez Narvaez,Liliana Esther Narvaez Narvaez (ID: 14218),9,0,9,0.0,0,2025-09-12 21:04:51
+14246,Valerie Elizabeth Davis Britton,Valerie Elizabeth Davis Britton (ID: 14246),4,0,4,0.0,0,2025-09-12 21:04:51
+14609,Juan Sebastian  Diaz Libreros,Juan Sebastian  Diaz Libreros (ID: 14609),1,0,1,0.0,0,2025-09-12 21:04:51
+14648,Nataly Quiceno Blandon,Nataly Quiceno Blandon (ID: 14648),10,0,10,0.0,0,2025-09-12 21:04:51
+14654,Julieth Lorena Abril Mogotocoro,Julieth Lorena Abril Mogotocoro (ID: 14654),4,0,4,0.0,0,2025-09-12 21:04:51
+14658,Angelica Paola Nova Bustamante,Angelica Paola Nova Bustamante (ID: 14658),1,0,1,0.0,0,2025-09-12 21:04:51
+14660,Diana Patricia Garay Carreno,Diana Patricia Garay Carreno (ID: 14660),2,0,2,0.0,0,2025-09-12 21:04:51
+14977,Viviana Serrano Gomez,Viviana Serrano Gomez (ID: 14977),11,0,11,0.0,0,2025-09-12 21:04:51
+15415,Daniel  Blandon Cardona,Daniel  Blandon Cardona (ID: 15415),2,0,2,0.0,0,2025-09-12 21:04:51
+16315,Camilo Cardozo Botero,Camilo Cardozo Botero (ID: 16315),1,0,1,0.0,0,2025-09-12 21:04:51
+16931,Michelle Andrea  Yanez Garzon,Michelle Andrea  Yanez Garzon (ID: 16931),7,0,7,0.0,0,2025-09-12 21:04:51
+16948,Andres Santiago  Hernandez Neuta,Andres Santiago  Hernandez Neuta (ID: 16948),6,0,6,0.0,0,2025-09-12 21:04:51
+17898,Francisco Eduardo Garniga Osorio,Francisco Eduardo Garniga Osorio (ID: 17898),5,0,5,0.0,0,2025-09-12 21:04:51
+19090,Emsho Fidel Alvarado Mendoza,Emsho Fidel Alvarado Mendoza (ID: 19090),8,0,8,0.0,0,2025-09-12 21:04:51
+20469,Regina Elizabeth Guerra Alvarenga,Regina Elizabeth Guerra Alvarenga (ID: 20469),1,0,1,0.0,0,2025-09-12 21:04:51
+21640,Violeta Elizabeth Gutierrez Escobar,Violeta Elizabeth Gutierrez Escobar (ID: 21640),1,0,1,0.0,0,2025-09-12 21:04:51
