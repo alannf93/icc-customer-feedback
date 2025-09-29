@@ -5,6 +5,7 @@ import logging
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional, Tuple
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pandas as pd
 import requests
@@ -12,7 +13,7 @@ import streamlit as st
 import plotly.express as px
 
 # ---- Configuration ----
-APP_DIR = Path(os.getenv("CSAT_APP_DIR", "./csat_analysis_cache"))
+APP_DIR = Path(os.getenv("CSAT_APP_DIR", "/content/csat_analysis_cache"))
 APP_DIR.mkdir(parents=True, exist_ok=True)
 ANALYSIS_RESULTS_FILE = APP_DIR / "ai_csat_analysis_results.csv"
 INTERPRETER_STATS_FILE = APP_DIR / "interpreter_performance_stats.csv"
@@ -132,7 +133,31 @@ class OllamaFeedbackAnalyzer:
             time.sleep(backoff)
             backoff *= 1.5
         return None
+    def analyze_feedback_batch(self, feedback_list: List[str], progress_callback=None) -> List[str]:
+        """Analyze a list of feedback items in parallel with progress tracking and save results to CSV."""
+        results = [None] * len(feedback_list)
+        total = len(feedback_list)
+        completed = 0
 
+        max_workers = (os.cpu_count() or 8)*2  # safe default
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_idx = {
+                executor.submit(self.categorize_single_feedback, fb): i
+                for i, fb in enumerate(feedback_list)
+            }
+            for future in as_completed(future_to_idx):
+                idx = future_to_idx[future]
+                try:
+                    results[idx] = future.result()
+                except Exception as e:
+                    logger.exception(f"Error analyzing feedback index {idx}: {e}")
+                    results[idx] = "error"
+
+                completed += 1
+                if progress_callback:
+                    progress_callback(completed, total)
+        return results
     def test_connection(self) -> List[str]:
         """Check Ollama /models (tags) endpoint for available models."""
         try:
@@ -266,18 +291,6 @@ class OllamaFeedbackAnalyzer:
                 return v
 
         return 'other'
-
-    def analyze_feedback_batch(self, feedback_list: List[str], progress_callback=None) -> List[str]:
-        """Analyze a list of feedback items. Calls progress_callback(current, total) if provided."""
-        results = []
-        total = len(feedback_list)
-        for i, fb in enumerate(feedback_list, start=1):
-            if progress_callback:
-                progress_callback(i, total)
-            cat = self.categorize_single_feedback(fb)
-            results.append(cat)
-            time.sleep(self.sleep_between_requests)
-        return results
 
 # ---- Prompt builder ----
 def create_categorization_prompt(feedback: str) -> str:
